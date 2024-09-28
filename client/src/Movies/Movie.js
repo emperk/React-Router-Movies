@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import MovieList from './MovieList';
+import { Route, useParams, NavLink, useRouteMatch } from 'react-router-dom'
 
 export default function Movie(props) {
   const [movie, setMovie] = useState();
+  const { movieList } = props;
+  const { movieID } = useParams();
+  const { url, path, params } = useRouteMatch();
 
-  let id = 1;
+  let id = movieID;
   // Change ^^^ that line and use a hook to obtain the :id parameter from the URL
 
   useEffect(() => {
@@ -13,6 +18,7 @@ export default function Movie(props) {
       .then(response => {
         // Study this response with a breakpoint or log statements
         // and set the response data as the 'movie' slice of state
+        console.log(response);
       })
       .catch(error => {
         console.error(error);
